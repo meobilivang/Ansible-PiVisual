@@ -1,0 +1,8 @@
+---
+- name: Deploy PiVisual to local Rasberry Pi host
+  host: localhost
+  become: true
+  gather_facts: false
+  roles:
+    - setup_system
+    - flask_app
