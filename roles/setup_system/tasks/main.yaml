@@ -1,0 +1,9 @@
+---
+- name: Install and set up Supervisor
+  ansible.builtin.import_tasks: supervisor.yaml
+
+- name: Configure network settings to allow Nginx
+  ansible.builtin.import_tasks: network.yaml
+
+- name: Install and set up Nginx
+  ansible.builtin.import_tasks: nginx.yaml

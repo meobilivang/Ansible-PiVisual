@@ -1,0 +1,18 @@
+---
+# Install supervisor
+- name: Install supervisor
+  ansible.builtin.dnf:
+    name: supervisor
+    state: present
+
+- name: Enable supervisor on boot
+  ansible.builtin.systemd:
+    name: supervisor
+    enabled: true
+
+- name: Manage PiVisual with supervisor
+  ansible.builtin.template:
+    src: templates/pi-visual.ini.j2
+    dest: /etc/supervisord.d/pi-visual.ini
+    mode: 0644
+  notify: Reload supervisor

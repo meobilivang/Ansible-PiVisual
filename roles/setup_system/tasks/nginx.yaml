@@ -1,0 +1,19 @@
+---
+# Install Nginx
+- name: Install nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
+
+- name: Enable Nginx on boot
+  ansible.builtin.systemd:
+    name: nginx
+    enabled: true
+
+# Set up Nginx file
+- name: Copy Nginx file
+  ansible.builtin.template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+  notify: Reload Nginx

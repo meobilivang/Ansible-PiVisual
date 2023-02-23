@@ -1,8 +1,11 @@
 ---
 - name: Deploy PiVisual to local Rasberry Pi host
-  host: localhost
+  hosts: localhost
   become: true
   gather_facts: false
+  vars:
+    repo_path: "/home/pnguyen/PiVisual"
+    app_port: 5000
   roles:
     - setup_system
     - flask_app

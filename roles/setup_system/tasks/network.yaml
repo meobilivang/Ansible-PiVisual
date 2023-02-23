@@ -1,0 +1,15 @@
+---
+# HTTPD scripts and modules
+- name: Enable httpd_can_network_connect boolean and persist across reboots
+  ansible.posix.seboolean:
+    name: httpd_can_network_connect
+    state: true
+    persistent: true
+
+# Open HTTP port
+- name: Allow traffic in public zone for http service
+  ansible.posix.firewalld:
+    service: http
+    permanent: true
+    state: enabled
+    immediate: true
