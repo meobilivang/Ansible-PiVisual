@@ -7,3 +7,6 @@
 
 - name: Install and set up Nginx
   ansible.builtin.import_tasks: nginx.yaml
+
+- name: Validate deployment
+  ansible.builtin.import_tasks: validate.yaml

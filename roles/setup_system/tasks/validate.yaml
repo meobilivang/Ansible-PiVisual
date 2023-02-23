@@ -1,0 +1,11 @@
+---
+- name: Validate the endpoint for PiVisual to return a 200 status code
+  ansible.builtin.uri:
+    url: "http://136.244.193.122:{{ port }}/5000"
+    method: GET
+    status_code: 200
+    return_content: false
+  register: result
+  until: result.status == 200
+  retries: 10
+  delay: 1
