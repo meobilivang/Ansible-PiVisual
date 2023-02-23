@@ -1,7 +1,7 @@
 ---
 - name: Validate the endpoint for PiVisual to return a 200 status code
   ansible.builtin.uri:
-    url: "http://136.244.193.122:{{ port }}/5000"
+    url: "http://136.244.193.122:{{ app_port }}/dashboard"
     method: GET
     status_code: 200
     return_content: false
