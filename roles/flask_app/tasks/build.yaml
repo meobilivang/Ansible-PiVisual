@@ -9,18 +9,21 @@
     version: master
   register: repo_cloned
 
-- name: Clone PiVisual into home directory
-  ansible.builtin.git:
-    repo: https://github.com/meobilivang/PiVisual.git
-    dest: "{{ repo_path }}"
-    clone: false
-    update: false
-    version: master
+- name: Clone and Deploy PiVisual in home directory if repo is not cloned yet
   when: repo_cloned.before == None
+  block:
+    - name: Clone PiVisual into home directory
+      ansible.builtin.git:
+        repo: https://github.com/meobilivang/PiVisual.git
+        dest: "{{ repo_path }}"
+        clone: true
+        update: true
+        version: master
+      when: repo_cloned.before == None
 
-# install virtualenv + dependencies
-- name: Install virtualenv and dependencies
-  ansible.builtin.pip:
-    requirements: "{{ repo_path }}/requirements.txt"
-    virtualenv: "{{ repo_path }}/.venv"
-    virtualenv_python: python3.11
+    # install virtualenv + dependencies
+    - name: Install virtualenv and dependencies
+      ansible.builtin.pip:
+        requirements: "{{ repo_path }}/requirements.txt"
+        virtualenv: "{{ repo_path }}/.venv"
+        virtualenv_python: python3.11

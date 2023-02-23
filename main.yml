@@ -7,5 +7,5 @@
     repo_path: "/home/pnguyen/PiVisual"
     app_port: 5000
   roles:
-    - setup_system
     - flask_app
+    - setup_system
