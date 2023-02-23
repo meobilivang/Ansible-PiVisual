@@ -1,0 +1,6 @@
+---
+- name: Clone repo and build application
+  ansible.builtin.import_tasks: build.yaml
+
+- name: Deploy PiVisual
+  ansible.builtin.import_tasks: deploy.yaml

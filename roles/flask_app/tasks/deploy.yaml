@@ -1,0 +1,7 @@
+---
+# start gunicorn
+- name: Run gunicorn on virtualenv
+  community.general.gunicorn:
+    app: "app"
+    venv: "{{ repo_path }}/.venv"
+    conf: "{{ repo_path }}/gunicorn.py"
