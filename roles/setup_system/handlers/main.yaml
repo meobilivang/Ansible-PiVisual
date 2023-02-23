@@ -1,10 +1,10 @@
 ---
-- name: Reload supervisor
+- name: Restart supervisor
   ansible.builtin.systemd:
     name: supervisord
-    state: reloaded
+    state: restarted
 
-- name: Reload Nginx
+- name: Restart Nginx
   ansible.builtin.systemd:
     name: nginx
-    state: reloaded
+    state: restarted

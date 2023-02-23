@@ -5,14 +5,19 @@
     name: supervisor
     state: present
 
-- name: Enable supervisor on boot
+- name: Start and enable supervisor on boot
   ansible.builtin.systemd:
-    name: supervisor
+    name: supervisord
     enabled: true
+    state: started
 
 - name: Manage PiVisual with supervisor
   ansible.builtin.template:
     src: templates/pi-visual.ini.j2
     dest: /etc/supervisord.d/pi-visual.ini
     mode: 0644
-  notify: Reload supervisor
+
+- name: Load the configuration for PiVisual in supervisor
+  community.general.supervisorctl:
+    name: pi-visual
+    state: present
